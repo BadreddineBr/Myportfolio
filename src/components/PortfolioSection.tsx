@@ -1,54 +1,56 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Smartphone, Cloud, Clock, X } from "lucide-react";
+import { ExternalLink, Smartphone, Cloud, Clock, X } from "lucide-react";
 
 const PortfolioSection = () => {
   const [showSnrtDemo, setShowSnrtDemo] = useState(false);
+  const [showTastyDemo, setShowTastyDemo] = useState(false);
+  const [showKhadamatDemo, setShowKhadamatDemo] = useState(false);
 
   const projects = [
     {
       title: "SNRTCall",
       description:
-        "Application mobile interne pour les employés de la SNRT permettant la gestion des appels via le protocole SIP avec serveur Asterisk.",
-      role: "Android Developer",
-      tools: ["Android", "Kotlin", "SIP", "Asterisk", "Material Design"],
+        "Internal mobile application for SNRT employees allowing call management via the SIP protocol with an Asterisk server.",
+      role: "Mobile VoIP App",
+      tools: ["Android", "Kotlin", "SIP", "Asterisk", "Liblinphone SDK"],
       features: [
-        "Authentification SIP",
-        "Appels internes VoIP",
-        "Suivi de l’historique",
-        "Interface intuitive",
+        "SIP authentication",
+        "Internal VoIP calls",
+        "Call history tracking",
+        "Intuitive interface",
       ],
       image: "https://i.postimg.cc/5yVyVk4B/2.png",
       icon: Smartphone,
     },
     {
-      title: "Météo App",
+      title: "TastyRecipy",
       description:
-        "Application météo complète avec une interface élégante, des prévisions précises et des animations interactives.",
-      role: "Full Stack Developer",
-      tools: ["Flutter", "Weather API", "Dart", "Custom Animations"],
+        "Mobile cooking app to explore, save, and easily follow detailed recipes illustrated with YouTube videos.",
+      role: "Cooking App",
+      tools: ["Kotlin", "MealDB API", "Room", "lottiefiles"],
       features: [
-        "Prévisions sur 7 jours",
-        "Cartes météo",
-        "Notifications push",
-        "Localisation automatique",
+        "Recipe search",
+        "Recipes with videos",
+        "Save favorite recipes",
+        "Smooth interface",
       ],
-      image:"https://i.postimg.cc/7hn6YMhp/3.png",
+      image: "https://i.postimg.cc/Qx4v4dH2/tasty.png",
       icon: Cloud,
     },
     {
       title: "Khadamat Culture",
       description:
-        "Application mobile utilisée par les agents sur PDA pour la gestion des billets dans les sites et monuments historiques.",
-      role: "Mobile Developer",
+        "Mobile app designed for PDA devices, allowing agents to efficiently validate tickets at historical sites and monuments with offline functionality.",
+      role: "Mobile Ticketing App",
       tools: ["Android", "Kotlin", "Room DB", "Bluetooth Printing"],
       features: [
-        "Vente de billets",
-        "Validation à l'entrée",
-        "Contrôle hors ligne",
-        "Impression instantanée",
+        "Ticket sales",
+        "Entry validation",
+        "Offline control",
+        "Instant printing",
       ],
-      image:"https://i.postimg.cc/NMTFZwcG/1.png",
+      image: "https://i.postimg.cc/NMTFZwcG/1.png",
       icon: Clock,
     },
   ];
@@ -73,19 +75,21 @@ const PortfolioSection = () => {
                 key={index}
                 className="bg-background-card rounded-lg border border-border overflow-hidden hover:border-primary/30 transition-all duration-300 hover:transform hover:scale-105 group"
               >
-                {/* Project Header */}
                 <div
                   className={`h-48 bg-gradient-to-br p-8 flex items-center justify-center relative overflow-hidden`}
                 >
                   {project.image ? (
-                    <img src={project.image} alt={`${project.title} logo`} className="w-40 h-auto z-10 opacity-90" />
+                    <img
+                      src={project.image}
+                      alt={`${project.title} logo`}
+                      className="w-40 h-auto z-10 opacity-90"
+                    />
                   ) : (
                     <IconComponent className="w-20 h-20 text-white opacity-90" />
                   )}
                   <div className="absolute inset-0 bg-black/20"></div>
                 </div>
 
-                {/* Project Content */}
                 <div className="p-6 space-y-4">
                   <div>
                     <h3 className="text-xl font-semibold text-foreground mb-2">
@@ -102,10 +106,9 @@ const PortfolioSection = () => {
                     </span>
                   </div>
 
-                  {/* Tools Used */}
                   <div>
                     <h4 className="text-sm font-medium text-foreground mb-2">
-                      Tools Used:
+                      Technologies Used:
                     </h4>
                     <div className="flex flex-wrap gap-1">
                       {project.tools.map((tool, toolIndex) => (
@@ -119,7 +122,6 @@ const PortfolioSection = () => {
                     </div>
                   </div>
 
-                  {/* Key Features */}
                   <div>
                     <h4 className="text-sm font-medium text-foreground mb-2">
                       Key Features:
@@ -134,25 +136,20 @@ const PortfolioSection = () => {
                     </ul>
                   </div>
 
-                  {/* Action Buttons */}
                   <div className="flex gap-2 pt-4">
-                    {project.title === "SNRTCall" ? (
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="flex-1"
-                        onClick={() => setShowSnrtDemo(true)}
-                      >
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        Demo
-                      </Button>
-                    ) : (
-                      <Button variant="outline" size="sm" className="flex-1">
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        Demo
-                      </Button>
-                    )}
-                  
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1"
+                      onClick={() => {
+                        if (project.title === "SNRTCall") setShowSnrtDemo(true);
+                        else if (project.title === "TastyRecipy") setShowTastyDemo(true);
+                        else if (project.title === "Khadamat Culture") setShowKhadamatDemo(true);
+                      }}
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      Demo
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -175,13 +172,67 @@ const PortfolioSection = () => {
                 <iframe
                   width="100%"
                   height="315"
-                  src="https://www.youtube.com/embed/f3oLCpiKawg"
+                  src="https://www.youtube.com/embed/W5vTYv3cDg4"
                   title="SNRTCall Demo"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   className="rounded-lg"
-                ></iframe>
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TastyRecipy Demo Modal */}
+        {showTastyDemo && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+            <div className="bg-background-card rounded-lg shadow-lg p-6 relative max-w-xl w-full">
+              <button
+                className="absolute top-3 right-3 text-muted-foreground hover:text-primary"
+                onClick={() => setShowTastyDemo(false)}
+                aria-label="Close"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <div className="aspect-video w-full">
+                <iframe
+                  width="100%"
+                  height="315"
+                  src="https://www.youtube.com/embed/eKDVpsMGoic"
+                  title="TastyRecipy Demo"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="rounded-lg"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Khadamat Culture Demo Modal */}
+        {showKhadamatDemo && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+            <div className="bg-background-card rounded-lg shadow-lg p-6 relative max-w-xl w-full">
+              <button
+                className="absolute top-3 right-3 text-muted-foreground hover:text-primary"
+                onClick={() => setShowKhadamatDemo(false)}
+                aria-label="Close"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <div className="aspect-video w-full">
+                <iframe
+                  width="100%"
+                  height="315"
+                  src="https://www.youtube.com/embed/ji_A6ZzSbXg"
+                  title="Khadamat Culture Demo"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="rounded-lg"
+                />
               </div>
             </div>
           </div>
@@ -202,6 +253,6 @@ const PortfolioSection = () => {
       </div>
     </section>
   );
-  };
+};
 
 export default PortfolioSection;

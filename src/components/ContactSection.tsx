@@ -203,7 +203,7 @@ const ContactSection = () => {
                 </div>
               </div>
               <p className="text-muted-foreground text-sm">
-                Available for remote work and local collaborations across North Africa and Europe.
+                Available for remote work and local collaborations worldwide.
               </p>
             </div>
           </div>
