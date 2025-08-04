@@ -38,7 +38,7 @@ const Typewriter = ({ words, speed = 100, pause = 1500 }) => {
 };
 
 // AnimatedCounter component
-const AnimatedCounter = ({ endValue, duration = 2000 }) => {
+const AnimatedCounter = ({ endValue, duration = 2000, suffix = "" }) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -75,7 +75,7 @@ const AnimatedCounter = ({ endValue, duration = 2000 }) => {
     requestAnimationFrame(animate);
   }, [inView, endValue, duration]);
 
-  return <span ref={ref} className="font-bold text-primary">{count}+</span>;
+  return <span ref={ref} className="font-bold text-primary">{count}{suffix}</span>;
 };
 
 // Starfield component
@@ -260,9 +260,9 @@ const HeroSection = () => {
             </h1>
 
             <div className="flex flex-wrap justify-center gap-4 text-lg sm:text-xl font-medium">
-              <span className="px-4 py-2 bg-background-card/80 backdrop-blur-sm rounded-full border border-border">THINK</span>
+              <span className="px-4 py-2 bg-background-card/80 backdrop-blur-sm rounded-full border border-border">LEARN</span>
               <span className="px-4 py-2 bg-background-card/80 backdrop-blur-sm rounded-full border border-border">BUILD</span>
-              <span className="px-4 py-2 bg-background-card/80 backdrop-blur-sm rounded-full border border-border">CREATE</span>
+              <span className="px-4 py-2 bg-background-card/80 backdrop-blur-sm rounded-full border border-border">GROW</span>
             </div>
           </div>
 
@@ -274,19 +274,19 @@ const HeroSection = () => {
           <div className="grid grid-cols-3 gap-8 max-w-md mx-auto pt-4">
             <div className="text-center">
               <div className="text-3xl">
-                <AnimatedCounter endValue={10} />
+                <AnimatedCounter endValue={10} suffix="+" />
               </div>
               <div className="text-sm text-muted-foreground">Projects</div>
             </div>
             <div className="text-center">
               <div className="text-3xl">
-                <AnimatedCounter endValue={3} />
+                <AnimatedCounter endValue={3} suffix="+" />
               </div>
               <div className="text-sm text-muted-foreground">Years Exp</div>
             </div>
             <div className="text-center">
               <div className="text-3xl">
-                <AnimatedCounter endValue={100} />%
+                <AnimatedCounter endValue={100} suffix="%" />
               </div>
               <div className="text-sm text-muted-foreground">Satisfaction</div>
             </div>

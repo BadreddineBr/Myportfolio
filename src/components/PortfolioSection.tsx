@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Smartphone, Cloud, Clock } from "lucide-react";
+import { ExternalLink, Github, Smartphone, Cloud, Clock, X } from "lucide-react";
 
 const PortfolioSection = () => {
+  const [showSnrtDemo, setShowSnrtDemo] = useState(false);
+
   const projects = [
     {
       title: "SNRTCall",
@@ -133,20 +136,56 @@ const PortfolioSection = () => {
 
                   {/* Action Buttons */}
                   <div className="flex gap-2 pt-4">
-                    <Button variant="outline" size="sm" className="flex-1">
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Demo
-                    </Button>
-                    <Button variant="ghost" size="sm" className="flex-1">
-                      <Github className="w-4 h-4 mr-2" />
-                      Code
-                    </Button>
+                    {project.title === "SNRTCall" ? (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1"
+                        onClick={() => setShowSnrtDemo(true)}
+                      >
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Demo
+                      </Button>
+                    ) : (
+                      <Button variant="outline" size="sm" className="flex-1">
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Demo
+                      </Button>
+                    )}
+                  
                   </div>
                 </div>
               </div>
             );
           })}
         </div>
+
+        {/* SNRTCall Demo Modal */}
+        {showSnrtDemo && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+            <div className="bg-background-card rounded-lg shadow-lg p-6 relative max-w-xl w-full">
+              <button
+                className="absolute top-3 right-3 text-muted-foreground hover:text-primary"
+                onClick={() => setShowSnrtDemo(false)}
+                aria-label="Close"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <div className="aspect-video w-full">
+                <iframe
+                  width="100%"
+                  height="315"
+                  src="https://www.youtube.com/embed/f3oLCpiKawg"
+                  title="SNRTCall Demo"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="rounded-lg"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="text-center mt-12">
           <a
@@ -163,6 +202,6 @@ const PortfolioSection = () => {
       </div>
     </section>
   );
-};
+  };
 
 export default PortfolioSection;

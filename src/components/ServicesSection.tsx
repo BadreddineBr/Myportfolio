@@ -1,5 +1,6 @@
 import { Smartphone, MonitorSmartphone, Palette, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const ServicesSection = () => {
   const services = [
@@ -60,6 +61,21 @@ const ServicesSection = () => {
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15, // Delay between each child animation
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
+  };
+
   return (
     <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-background-secondary">
       <div className="max-w-7xl mx-auto">
@@ -72,13 +88,20 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <motion.div
+          className="grid lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show" // Animate when the container comes into view
+          viewport={{ once: true, amount: 0.3 }} // Animation only runs once, when 30% of the container is visible
+        >
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
-              <div
+              <motion.div
                 key={index}
                 className={`bg-background-card p-8 rounded-lg border ${service.borderColor} hover:border-primary/30 transition-all duration-300 hover:transform hover:scale-105 group`}
+                variants={itemVariants}
               >
                 <div
                   className={`w-16 h-16 ${service.bgColor} rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
@@ -106,10 +129,10 @@ const ServicesSection = () => {
                     </Button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         <div className="text-center mt-16">
           <div className="bg-background-card p-8 rounded-lg border border-border">

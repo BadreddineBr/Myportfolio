@@ -239,3 +239,63 @@
 .animate-pop {
   animation: pop 0.3s ease-out forwards;
 }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes floating {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+.floating-animation {
+  animation: floating 3s ease-in-out infinite;
+}
+.quote-glass {
+  position: relative;
+  background: linear-gradient(45deg, #18181B, #27272A);
+  color: rgb(255 130 42);
+  border-radius: 10px;
+  padding: 1.5rem;
+  font-style: italic;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(255, 165, 0, 0.4);
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.quote-glass:hover {
+  background: linear-gradient(45deg, #27272A, #3F3F46);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.quote-glass::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.quote-glass:hover::before {
+  left: 100%;
+}

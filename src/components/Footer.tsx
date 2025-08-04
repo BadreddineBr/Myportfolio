@@ -37,7 +37,7 @@ const Footer = () => {
             <p className="text-sm text-muted-foreground flex items-center justify-center">
               © {currentYear} Made with 
               <Heart className="w-4 h-4 mx-1 text-red-500 fill-current" />
-              and joyful late nights :)
+              and and many late nights :)
             </p>
           </div>
         </div>
